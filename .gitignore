@@ -2,5 +2,7 @@
 
 /dist
 
+/copies
+
 .env
 .env.development
