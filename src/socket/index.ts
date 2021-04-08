@@ -13,21 +13,27 @@ export default function socketEvents(io) {
 
       if (error) return callback(error);
 
-      socket.emit('message', {
-        user: 'admin',
+      socket.join(user.room);
+
+      socket.emit('adminMessage', {
+        user: { name: 'Cryptic Activist Bot' },
         text: `${user.name}, welcome to the room ${user.room}`,
       });
-      socket.broadcast
-        .to(user.room)
-        .emit('message', { user: 'admin', text: `${user.name}, has joined!` });
+      socket.broadcast.to(user.room).emit('message', {
+        user: { name: 'Cryptic Activist Bot' },
+        text: `${user.name}, has joined!`,
+      });
 
-      socket.join(user.room);
+      io.to(user.room).emit('roomData', {
+        room: user.room,
+        users: getUsersInRoom(user.room),
+      });
 
       callback();
     });
 
     socket.on('sendMessage', (message, callback) => {
-      console.log('message:', message);
+      // console.log('message:', message);
 
       const user = getUser(socket.id);
 
@@ -38,6 +44,20 @@ export default function socketEvents(io) {
 
     socket.on('end', () => {
       console.log('Disconnected');
+      const user = removeUser(socket.id);
+
+      if (user) {
+        io.to(user.room).emit('message', {
+          user: {
+            name: 'admin',
+          },
+          text: `${user.name} has left.`,
+        });
+        io.to(user.room).emit('roomData', {
+          room: user.room,
+          users: getUsersInRoom(user.room),
+        });
+      }
     });
   });
 }
