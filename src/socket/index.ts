@@ -19,6 +19,7 @@ export default function socketEvents(io) {
         user: { name: 'Cryptic Activist Bot' },
         text: `${user.name}, welcome to the room ${user.room}`,
       });
+
       socket.broadcast.to(user.room).emit('message', {
         user: { name: 'Cryptic Activist Bot' },
         text: `${user.name}, has joined!`,
@@ -32,18 +33,13 @@ export default function socketEvents(io) {
       callback();
     });
 
-    socket.on('sendMessage', (message, callback) => {
-      // console.log('message:', message);
-
+    socket.on('sendMessage', (message) => {
       const user = getUser(socket.id);
 
       io.to(user.room).emit('message', { user: user.name, text: message });
-
-      // callback();
     });
 
     socket.on('end', () => {
-      console.log('Disconnected');
       const user = removeUser(socket.id);
 
       if (user) {
