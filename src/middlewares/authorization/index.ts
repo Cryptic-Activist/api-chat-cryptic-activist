@@ -11,8 +11,8 @@ export function authenticateUser(
 ): Response {
   try {
     if (
-      req.headers.authorization === undefined ||
-      req.headers.authorization === null
+      req.headers.authorization === undefined
+      || req.headers.authorization === null
     ) {
       return res.status(401).send({
         status_code: 401,
@@ -33,7 +33,7 @@ export function authenticateUser(
 
     jwt.verify(
       authorization[1],
-      process.env.JWT_ACCESS_TOKEN_SECRET,
+      process.env.JWT_SECRET,
       async (error, decoded: { userId: string }) => {
         if (error) {
           return res.status(401).send({
