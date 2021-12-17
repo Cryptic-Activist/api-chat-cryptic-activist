@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import CrypticBase from 'cryptic-base';
+import { createChat } from 'cryptic-base';
 
 // export async function index(req: Request, res: Response): Promise<Response> {
 //   try {
@@ -13,14 +13,12 @@ import CrypticBase from 'cryptic-base';
 //   }
 // }
 
-export async function createChat(
+export async function createChatController(
   req: Request,
   res: Response,
 ): Promise<Response> {
   try {
-    const crypticBase = new CrypticBase(false);
-
-    const newChat = await crypticBase.createChat({});
+    const newChat = await createChat({});
 
     return res.status(200).send({
       status_code: 200,
