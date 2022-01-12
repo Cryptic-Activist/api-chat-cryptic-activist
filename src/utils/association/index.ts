@@ -7,9 +7,7 @@ export async function associateLanguageToUser(
   languageName: string,
   user_id: string,
 ): Promise<any> {
-  const cleanReqBody: { languageName: string } = sanitizeInputLanguage(
-    languageName,
-  );
+  const cleanReqBody: { languageName: string } = sanitizeInputLanguage(languageName);
 
   const user = await User.findByPk(user_id);
 
