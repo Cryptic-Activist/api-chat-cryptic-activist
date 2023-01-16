@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createChat } from 'cryptic-base';
+import { createChat } from 'base-ca';
 
 // export async function index(req: Request, res: Response): Promise<Response> {
 //   try {
