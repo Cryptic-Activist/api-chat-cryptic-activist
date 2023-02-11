@@ -1,12 +1,9 @@
-import 'dotenv/config';
 import '@database/index';
-import setUpSocket from '@config/socket';
+import 'dotenv/config';
 import express from 'express';
 import { createServer } from 'http';
 
 import middlewares from '@middlewares/index';
-
-import socketEvents from '@socket/index';
 
 import routes from '@routes/index';
 
@@ -16,9 +13,9 @@ middlewares(app);
 
 const httpServer = createServer(app);
 
-const io = setUpSocket(httpServer);
+// const io = setUpSocket(httpServer);
 
-socketEvents(io);
+// socketEvents(io);
 
 routes(app);
 

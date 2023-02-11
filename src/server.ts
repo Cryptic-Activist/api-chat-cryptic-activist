@@ -1,9 +1,8 @@
 import { success } from '@utils/logger/logger';
 import chalk from 'chalk';
-import { checkEnvironmentVariable } from '@utils/checkers/env';
 import app from './app';
 
-checkEnvironmentVariable();
+// checkEnvironmentVariable();
 
 const port = process.env.PORT;
 

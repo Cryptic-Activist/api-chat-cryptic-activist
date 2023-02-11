@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
 import { createChat } from 'base-ca';
+import { Request, Response } from 'express';
 
 // export async function index(req: Request, res: Response): Promise<Response> {
 //   try {
@@ -18,7 +18,8 @@ export async function createChatController(
   res: Response,
 ): Promise<Response> {
   try {
-    const newChat = await createChat({});
+    const { body } = req;
+    const newChat = await createChat(body);
 
     return res.status(200).send({
       status_code: 200,
