@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { getSystemMessagesController } from '@controllers/systemMessages';
-import { authenticateUser } from '@middlewares/authorization';
+import { getSystemMessagesController } from '../../controllers/systemMessages';
+import { authenticateUser } from '../../middlewares/authorization';
 
 const router = Router();
 

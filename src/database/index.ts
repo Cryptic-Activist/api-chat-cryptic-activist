@@ -1,7 +1,7 @@
-import connection from '@config/database';
+import connection from '../config/database';
 
-import User from '@models/User/User';
-import Language from '@models/Language/Language';
+import Language from '../models/Language/Language';
+import User from '../models/User/User';
 
 User.init(connection);
 Language.init(connection);

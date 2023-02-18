@@ -1,11 +1,11 @@
-import '@database/index';
 import 'dotenv/config';
 import express from 'express';
 import { createServer } from 'http';
+import './database/index';
 
-import middlewares from '@middlewares/index';
+import middlewares from './middlewares/index';
 
-import routes from '@routes/index';
+import routes from './routes/index';
 
 const app = express();
 

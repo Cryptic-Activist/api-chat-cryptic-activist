@@ -1,6 +1,6 @@
-import { success } from '@utils/logger/logger';
 import chalk from 'chalk';
 import app from './app';
+import { success } from './utils/logger/logger';
 
 // checkEnvironmentVariable();
 
