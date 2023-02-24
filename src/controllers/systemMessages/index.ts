@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
+import { createSystemMessage } from 'base-ca';
 import { getSystemMessages } from 'cryptic-base';
-import { sanitize, sanitizeQueryArray, convertWhere } from 'cryptic-utils';
+import { convertWhere, sanitize, sanitizeQueryArray } from 'cryptic-utils';
+import { Request, Response } from 'express';
 
 export async function getSystemMessagesController(
   req: Request,
@@ -34,3 +35,27 @@ export async function getSystemMessagesController(
     });
   }
 }
+
+export const createSystemMessageController = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
+  try {
+    const { body } = req;
+
+    const createdSystemMessage = await createSystemMessage(body);
+
+    console.log(createdSystemMessage);
+
+    return res.status(200).send({
+      status_code: 200,
+      results: createdSystemMessage,
+      errors: [],
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status_code: 500,
+      errors: [err.message],
+    });
+  }
+};
